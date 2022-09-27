@@ -182,11 +182,11 @@
     </script>
     <script type="lazyload2" data-src="{{ 'lazysizes.min.js' | asset_url }}"></script>
     {% if settings.currency_conversion_enabled %}
-    <script src="//cdn.shopify.com/s/javascripts/currencies.js" defer></script>
+    <script type="lazyload2" data-src="//cdn.shopify.com/s/javascripts/currencies.js" defer></script>
     {% endif %}
     {%- if request.page_type == 'customers/addresses' -%}
-    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
-    <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+    <script type="lazyload2" data-src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+    <script type="lazyload2" data-src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
     {%- endif -%}
     
     <link rel="preload" href="https://fonts.shopifycdn.com/din_next/dinnext_n4.438c249fdbceeefafa64221353c5ece2fdb8ae14.woff2?h1=cGxjLWRpcmVjdC5jb20&hmac=758195a3f215ee61a718f2f3b5581a899f52c923f2bb28deadadbad12ae0d62b" as="font" type="font/woff2" crossorigin>
