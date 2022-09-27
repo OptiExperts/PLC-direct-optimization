@@ -77,7 +77,6 @@
     {%- if settings.favicon -%}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '48x48' }}" type="image/png">
     {%- endif -%}
-    <img width="99999" height="99999" style="pointer-events: none; position: absolute; top: 0; left: 0; width: 99vw; height: 99vh; max-width: 99vw; max-height: 99vh;"  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+">
     {% render 'social-meta-tags' %}
     {%- comment -%}Few prefech to increase performance on commonly used third-parties{%- endcomment -%}
     <link rel="preconnect" href="//fonts.shopifycdn.com">
@@ -182,11 +181,11 @@
     </script>
     <script type="lazyload2" data-src="{{ 'lazysizes.min.js' | asset_url }}"></script>
     {% if settings.currency_conversion_enabled %}
-    <script type="lazyload2" data-src="//cdn.shopify.com/s/javascripts/currencies.js" defer></script>
+    <script src="//cdn.shopify.com/s/javascripts/currencies.js" defer></script>
     {% endif %}
     {%- if request.page_type == 'customers/addresses' -%}
-    <script type="lazyload2" data-src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
-    <script type="lazyload2" data-src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+    <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
     {%- endif -%}
     
     <link rel="preload" href="https://fonts.shopifycdn.com/din_next/dinnext_n4.438c249fdbceeefafa64221353c5ece2fdb8ae14.woff2?h1=cGxjLWRpcmVjdC5jb20&hmac=758195a3f215ee61a718f2f3b5581a899f52c923f2bb28deadadbad12ae0d62b" as="font" type="font/woff2" crossorigin>
@@ -262,6 +261,9 @@
         }
       }, 1000)
     </script>
+    <script>
+      console.log('test');
+    </script>    
     {% comment %}This is from goCart.{% endcomment %}{% include 'go-cart' %}
     {% include 'lp-dynamic-remarketing' %}
     <!-- **BEGIN** Hextom FSB Integration // Main Include - DO NOT MODIFY -->
