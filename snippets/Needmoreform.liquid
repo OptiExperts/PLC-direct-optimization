@@ -1,0 +1,371 @@
+<!-- <head>
+  
+ 
+     <style>
+.request-form {
+    border: 1px black solid;
+    border-radius: 14px;
+    padding: 17px;
+}
+    .product-form .price--compare {
+   
+    margin-right: .7em;
+   
+}
+  #contactFormWrapper input,  #contactFormWrapper select {
+    width:auto;
+    border: 1px solid black;
+    border-radius:5px;
+    padding:2px;
+      }
+         
+       
+      @media screen and (min-width: 641px) {
+.card__collapsible-button, .card__section {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 28px;
+    padding-left: 30px;
+}
+        }
+       
+       
+  </style>   
+
+ 
+</head>
+
+<div class="section__title heading">
+      <h2>Need more?</h2>
+    </div>
+        <div class='request-form'>
+                 
+  
+     <div class="layout__section">
+    
+      
+      {%- form 'contact', class: 'form' -%}
+        {%- if section.settings.show_store_info -%}
+          <div class="form__header">
+            <h2 class="heading h3">{{ section.settings.form_heading | escape }}</h2>
+          </div>
+        {%- endif -%}
+
+        {%- if form.posted_successfully? -%}
+          <p class="alert alert--success"> The inquiry is successfully submitted </p>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div class="alert alert--error">
+            <ul class="alert__error-list">
+              {%- for field in form.errors -%}
+                {%- if field == 'form' -%}
+                  <li class="alert__error-item">{{ form.errors.messages[field] }}</li>
+                {%- else -%}
+                  <li class="alert__error-item">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+       
+
+      
+
+  <div id="contactFormWrapper">
+    <p> I need 
+  
+   <spain>   <input  class="required" placeholder="Qty" type="number" required id="contactFormQty" name="contact[qty]"> </spain>  
+    
+  units by 
+      
+  <select class="required" placeholder="When" type="number" required id="contactFormWhen" name="contact[When]" >
+    
+    <option value="I can wait a bit">I can wait a bit</option>
+    <option value="A few days from now">A few days from now</option>
+    <option value="Next day">Next day</option>
+  
+    
+  </select>
+ 
+      
+  shipping to
+  
+   <spain>   <input  class="required" placeholder="zip code" type="number" required id="contactFormZipcode" name="contact[Zipcode]"> </spain>
+   
+
+ 
+      <input type="email"   placeholder="email" required id="contactFormEmail" name="contact[email]">
+
+    </p>
+   
+      
+  </div>
+  
+   <div>
+      <input type="hidden" name="contact[body]" value="Inquiry for  {{ product.title | escape }} " />         
+   
+
+       <input type="hidden" name="contact[product title]" value="{{ product.title }}">
+       <input type="hidden" name="contact[product url]" value="{{ shop.url }}{{ product.url }}">
+       <input type="hidden" name="contact[product id]" value="{{ product.id }}">
+  
+       </div>
+       
+        <button type="submit" class="form__submit {% unless section.settings.show_store_info %}form__submit--centered{% endunless %} button button--primary button--min-width">Submit Inquiry</button>
+      {%- endform -%}
+    </div>
+      
+  </div>   -->
+
+<!-- <style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #bc1907;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+    position: relative;
+    /* bottom: 23px; */
+    /* right: 28px; */
+    display: block;
+    width: 280px;
+}
+  .form-popup::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: -1;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: absolute;
+    top: 50%;
+    /* left: 50%; 
+    border: 3px solid #f1f1f1;*/
+    z-index: 9;
+    width: 100%;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+  margin:auto;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+</style>
+
+<button class="open-button desk-dis" onclick="openForm()">Need More?</button>
+
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+ -->
+<div class="accordion_container">
+    <div class="accordion_head">Need More?<span class="plusminus">+</span>
+
+    </div>
+    <div class="accordion_body" style="display: none;">
+        <div class="content_panel">
+<!-- 			<div class="CustomForm_ProductListing"> {% comment %} section__title heading {% endcomment %}
+<!--   <span class="product-meta__vendor link link--accented custom">Please, complete the form to apply:</span>    --
+  {% comment %} <h2>Need more?</h2> {% endcomment %}
+    </div> -->
+        	<div class='request-form'>               
+     <div class="layout__section">
+
+       {%- form 'contact', class: 'form' -%}
+        {%- if section.settings.show_store_info -%}
+          <div class="form__header">
+            <h2 class="heading h3">{{ section.settings.form_heading | escape }}</h2>
+          </div>
+        {%- endif -%}
+
+        {%- if form.posted_successfully? -%}
+          <p class="alert alert--success"> The inquiry is successfully submitted </p>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div class="alert alert--error">
+            <ul class="alert__error-list">
+              {%- for field in form.errors -%}
+                {%- if field == 'form' -%}
+                  <li class="alert__error-item">{{ form.errors.messages[field] }}</li>
+                {%- else -%}
+                  <li class="alert__error-item">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+    
+
+  <div id="contactFormWrapper">
+    <div class="cus-col">
+   <span class="HelpQuestion_ProductListing">How many units do you need?</span>
+  <!--- <p> I need  ---> <br>
+   {% comment %} We fix the broken input by adding some extra attributes{% endcomment %}
+   <span><input pattern="^[0-9]" step="1" type="number" min="1" max="5" class="required" placeholder="Enter the desired quantity of units" type="number" required id="contactFormQty" name="contact[qty]"></span>  
+   <br>
+    </div>
+  <!---- units by ---> 
+   <div class="cus-col">
+  <span class="HelpQuestion_ProductListing">When do you need them in your stock?</span>    
+  <select class="required" placeholder="When" type="number" required id="contactFormWhen" name="contact[When]" >    
+    <option value="I can wait a bit">I can wait a bit</option>
+    <option value="A few days from now">A few days from now</option>
+    <option value="Next day">Next day</option>  
+  </select>
+  <br>
+    </div>
+    
+      <div class="cus-col">
+  <span class="HelpQuestion_ProductListing">Where do you want it to be shipped?</span><br>    
+<!---  shipping to  --->
+   <span><input class="required" placeholder="ZIP" type="number" required id="contactFormZipcode" name="contact[Zipcode]"> </span>
+    <br>
+    </div>
+     <div class="cus-col">
+      <span class="HelpQuestion_ProductListing">Contact info:</span><br> 
+       <input type="email" id="custom_contactInput" placeholder="Enter your Email" required id="contactFormEmail" name="contact[email]">
+    <!--- </p> --->
+    </div>
+  </div>
+  
+   <div>
+      <input type="hidden" name="contact[body]" value="Inquiry for  {{ product.title | escape }} " />         
+       <input type="hidden" name="contact[product title]" value="{{ product.title }}">
+       <input type="hidden" name="contact[product url]" value="{{ shop.url }}{{ product.url }}">
+       <input type="hidden" name="contact[product id]" value="{{ product.id }}">  
+       </div>       
+        <button type="submit" class="form__submit {% unless section.settings.show_store_info %}form__submit--centered{% endunless %} button button--primary button--min-width">Submit Inquiry</button>
+      {%- endform -%}
+    </div>
+  </div>  
+  		</div>
+    </div>
+<div class="accordion_head con">Contact Us<span class="plusminus">+</span>
+
+    </div>
+    <div class="accordion_body" style="display: none;">
+        <div class="content_panel">
+         <div class="rte text--pull">
+                We are most responsive by chat and email (support@plc-direct.com) but can also be reached by phone at (847) 242-1595. If expedited shipping is needed, please contact us in advance of your purchase and one of our reps will support you!
+             </div>
+        </div>
+    </div> 
+    
+</div>
+
+<style>
+  .accordion_container {
+    width: 100%;
+}
+.accordion_head {
+/*    background-color: #fff; */
+    color: #000;
+    font-weight:bold;
+    cursor: pointer;
+    font-family: arial;
+    font-size: 16px;
+    margin: 0 0 1px 0;
+    padding: 7px 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    line-height: 42px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e1e3e4;
+}
+  .accordion_head.con {
+   border:none; 
+  }
+.accordion_body {
+    background: transparent;
+    padding:7px 11px;
+}
+.accordion_body p {
+    padding: 18px 5px;
+    margin: 0px;
+}
+.plusminus {
+    float:right;
+}
+</style>
+
+<script>
+  $(document).ready(function () {
+    //toggle the component with class accordion_body
+    $(".accordion_head").click(function () {
+        if ($('.accordion_body').is(':visible')) {
+            $(".accordion_body").slideUp(300);
+            $(".plusminus").text('+');
+        }
+        if ($(this).next(".accordion_body").is(':visible')) {
+            $(this).next(".accordion_body").slideUp(300);
+            $(this).children(".plusminus").text('+');
+        } else {
+            $(this).next(".accordion_body").slideDown(300);
+            $(this).children(".plusminus").text('-');
+          
+        }
+    });
+});
+</script>

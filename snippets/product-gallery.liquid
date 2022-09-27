@@ -1,0 +1,162 @@
+{%- if product.images.size > 0 -%}
+  {%- assign show_thumbnails_if_one_image = true -%}
+
+  <div class="card">
+    <div class="card__section card__section--tight">
+      <div class="product-gallery {% if show_thumbnails_if_one_image %}product-gallery--with-thumbnails{% endif %}">
+        {%- assign selected_image = product.selected_variant.image | default: product.featured_image -%}
+
+        <div class="product-gallery__carousel-wrapper">
+          <div class="product-gallery__carousel {% if template != 'product.quick-view' and section.settings.enable_image_zoom %}product-gallery__carousel--zoomable{% endif %}" data-image-count="{{ product.images.size }}" data-initial-image-id="{{ selected_image.id }}">
+            {%- for image in product.images -%}
+              {%- assign is_video = false -%}
+              {%- assign is_image_group = false -%}
+              {%- assign is_image_filtered = false -%}
+              {%- assign image_alt = image.alt -%}
+
+              {%- if image.alt contains 'youtube.com/embed' or image.alt contains 'player.vimeo.com' -%}
+                {%- assign is_video = true -%}
+              {%- else -%}
+                {%- if image.alt contains '#' -%}
+                  {%- assign is_image_group = true -%}
+                  {%- assign alt_parts = image.alt | split: '#' -%}
+
+                  {%- comment -%}
+                  If the custom ALT tag contains two parts (for instance "My custom alt # color_blue") then the first part is actually used
+                  as a custom ALT tag
+                  {%- endcomment -%}
+
+                  {%- if alt_parts.size == 2 and alt_parts.first != blank -%}
+                    {%- assign image_alt = alt_parts.first | strip -%}
+                  {%- else -%}
+                    {%- assign image_alt = product.title -%}
+                  {%- endif -%}
+
+                  {%- assign image_group_parts = alt_parts.last | split: '_' -%}
+
+                  {%- for option in product.options -%}
+                    {%- assign downcase_option = option | downcase -%}
+                    {%- assign downcase_group_option = image_group_parts.first | strip | downcase -%}
+
+                    {%- if downcase_option == downcase_group_option -%}
+                      {%- assign option_setting = 'option' | append: forloop.index -%}
+                      {%- assign option_value = product.selected_or_first_available_variant[option_setting] | downcase -%}
+
+                      {%- assign downcase_group_value = image_group_parts.last | strip | downcase -%}
+                      {%- assign image_variant_ids = image.variants | map: 'id' -%}
+
+                      {%- if option_value != downcase_group_value -%}
+                        {%- unless image_variant_ids contains product.selected_or_first_available_variant.id -%}
+                          {%- assign is_image_filtered = true -%}
+                        {%- endunless -%}
+                      {%- endif -%}
+
+                      {%- break -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              {%- endif -%}
+
+              <div class="product-gallery__carousel-item {% if image.id == selected_image.id %}is-selected{% endif %} {% if is_image_filtered %}is-filtered{% endif %}" data-image-id="{{ image.id }}" {% if is_image_group %}data-group-name="{{ image_group_parts.first | strip | downcase | escape }}" data-group-value="{{ image_group_parts.last | strip | downcase | escape }}"{% endif %}>
+                <div class="product-gallery__size-limiter" style="max-width: {{ image.width }}px">
+                  {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: image -%}{%- endcapture -%}
+                  {%- assign image_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                  {%- if is_video -%}
+                    <div class="video-wrapper">
+                      {%- if image.alt contains 'youtube.com/embed' -%}
+                        <iframe class="lazyload" data-src="{{ image.alt | escape | split: '?' | first }}?showinfo=0&controls=1&rel=0&modestbranding=1" frameborder="0" allowfullscreen></iframe>
+                      {%- else -%}
+                        <iframe class="lazyload" data-src="{{ image.alt | escape | split: '?' | first }}?portrait=0&byline=0&color={{ settings.accent_color | remove_first: '#' }}" frameborder="0" allowfullscreen></iframe>
+                      {%- endif -%}
+                    </div>
+                  {%- else -%}
+                    <div class="aspect-ratio" style="padding-bottom: {{ 100.0 | divided_by: image.aspect_ratio }}%">
+                      <img class="product-gallery__image lazyload image--blur-up" src="{{ image | img_url: '60x' }}" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" data-zoom="{{ image | img_url: '1600x' }}" alt="{{ image_alt | escape }}">
+
+                      <noscript>
+                        <img src="{{ image | img_url: '800x' }}" alt="{{ image_alt | escape }}">
+                      </noscript>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+<!-- 
+          {%- if template != 'product.quick-view' and section.settings.enable_image_zoom -%}
+            <span class="product-gallery__zoom-notice">{% render 'icon', icon: 'zoom' %} {{ 'product.general.zoom' | t }}</span>
+          {%- endif -%} -->
+        </div>
+
+        {%- if show_thumbnails_if_one_image -%}
+          <div class="scroller">
+            <div class="scroller__inner">
+              <div class="product-gallery__thumbnail-list">
+                {%- for image in product.images -%}
+                  {%- assign is_video = false -%}
+                  {%- assign is_image_group = false -%}
+                  {%- assign is_image_filtered = false -%}
+                  {%- assign image_alt = image.alt -%}
+
+                  {%- if image.alt contains 'youtube.com/embed' or image.alt contains 'player.vimeo.com' -%}
+                    {%- assign is_video = true -%}
+                  {%- else -%}
+                    {%- if image.alt contains '#' -%}
+                      {%- assign is_image_group = true -%}
+                      {%- assign alt_parts = image.alt | split: '#' -%}
+
+                      {%- comment -%}
+                      If the custom ALT tag contains two parts (for instance "My custom alt # color_blue") then the first part is actually used
+                      as a custom ALT tag
+                      {%- endcomment -%}
+
+                      {%- if alt_parts.size == 2 and alt_parts.first != blank -%}
+                        {%- assign image_alt = alt_parts.first | strip -%}
+                      {%- else -%}
+                        {%- assign image_alt = product.title -%}
+                      {%- endif -%}
+
+                      {%- assign image_group_parts = alt_parts.last | split: '_' -%}
+
+                      {%- for option in product.options -%}
+                        {%- assign downcase_option = option | downcase -%}
+                        {%- assign downcase_group_option = image_group_parts.first | strip | downcase -%}
+
+                        {%- if downcase_option == downcase_group_option -%}
+                          {%- assign option_setting = 'option' | append: forloop.index -%}
+                          {%- assign option_value = product.selected_or_first_available_variant[option_setting] | downcase -%}
+
+                          {%- assign downcase_group_value = image_group_parts.last | strip | downcase -%}
+                          {%- assign image_variant_ids = image.variants | map: 'id' -%}
+
+                          {%- if option_value != downcase_group_value -%}
+                            {%- unless image_variant_ids contains product.selected_or_first_available_variant.id -%}
+                              {%- assign is_image_filtered = true -%}
+                            {%- endunless -%}
+                          {%- endif -%}
+
+                          {%- break -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  <div class="product-gallery__thumbnail {% if is_video %}product-gallery__thumbnail--video{% endif %} {% if image.id == selected_image.id %}is-nav-selected{% endif %} {% if is_image_filtered %}is-filtered{% endif %}" data-image-id="{{ image.id }}" {% if is_image_group %}data-group-name="{{ image_group_parts.first | strip | downcase | escape }}" data-group-value="{{ image_group_parts.last | strip | downcase | escape }}"{% endif %}>
+                    <div class="aspect-ratio" style="padding-bottom: {{ 100.0 | divided_by: image.aspect_ratio }}%">
+                      <img src="{{ image | img_url: '130x' }}" alt="{{ image_alt | escape }}">
+                    </div>
+
+                    {%- if is_video -%}
+                      {% render 'icon', icon: 'play' %}
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

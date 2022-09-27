@@ -1,0 +1,60 @@
+<!-- Google Dynamic Remarketing for Shopify theme.liquid -->
+{% if template contains 'index' %}
+	<script type="text/javascript">
+	var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'home',
+		ecomm_totalvalue: 0,
+	};
+	</script>
+{% elsif template contains 'collection' %}
+	<script type="text/javascript">
+	var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'category',
+		ecomm_totalvalue: 0,
+	};
+	</script>
+{% elsif template contains 'product' %}
+	<script type="text/javascript">
+	var google_tag_params = {
+		ecomm_prodid: '{{product.id}}',
+		ecomm_pagetype: 'product',
+		ecomm_totalvalue: {{ product.selected_or_first_available_variant.price | money_without_currency | remove: "," }}
+	};
+	</script>
+{% elsif template contains 'cart' %}
+<script type="text/javascript">
+var google_tag_params = {
+    ecomm_prodid: [{% for item in cart.items %}'{{item.product.id}}'{% unless forloop.last %},{% endunless %}{% endfor %}],
+    ecomm_pagetype: 'cart',
+    ecomm_totalvalue: {{cart.total_price | money_without_currency | remove: "," }}
+}
+	</script>
+{% elsif template contains 'search' %}
+	<script type="text/javascript">
+	var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'searchresults',
+		ecomm_totalvalue: 0,
+	}
+	</script>
+{% else %}
+	<script type="text/javascript">
+	var google_tag_params = {
+		ecomm_prodid: '',
+		ecomm_pagetype: 'other',
+		ecomm_totalvalue: 0,
+	};
+	</script>
+{% endif %}
+
+<script>
+gtag('event', 'page_view', {
+    'send_to': 'AW-659620154',
+    'ecomm_pagetype': google_tag_params.ecomm_pagetype,
+    'ecomm_prodid': google_tag_params.ecomm_prodid,
+    'ecomm_totalvalue': google_tag_params.ecomm_totalvalue,
+});
+</script>
+<!-- End LP Google Dynamic Remarketing for Shopify theme.liquid -->

@@ -1,0 +1,150 @@
+{% if section.settings.show_brands_slider %}
+<div data-section-id="{{ section.id }}"  id="slick-{{ section.id }}" class="slickslider brands-responsive{% if section.settings.slideshow_width == 'contained' %} container mb30 {% else %} mt-30 {% endif %}" data-section-type="brands-slideshow-section">  
+  {% for block in section.blocks %}
+    <div class="center brand-slide">
+      {% if block.settings.brand_link %}<a href="{{ block.settings.brand_link }}">{% endif %}
+        <img src="{{ block.settings.slideshow_image | img_url: '133x' }}" alt="{{ block.settings.slideshow_image.alt }}">
+      {% if block.settings.brand_link %}</a>{% endif %}
+    </div>
+  {% endfor %}  
+</div>
+{% endif %}
+
+{% schema %}
+ {
+    "name": "Brands Slider",
+    "max_blocks": 20,
+    "settings": [
+      {
+        "type": "select",
+        "id": "slideshow_width",
+        "label": "Layout",
+        "options": [
+          {
+            "value": "full",
+            "label": "Full-width"
+          },
+          {
+            "value": "contained",
+            "label": "Contained"
+          }
+        ],
+        "default": "full"
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_brands_slider",
+        "label": "Enable brands slider",
+		"default": true
+      },
+
+      {
+        "type": "header",
+        "content": "Info"
+      },
+      {
+        "type": "paragraph",
+        "content": "You may upload up to 25 brands"
+      },
+	  {
+        "type": "paragraph",
+        "content": "Please try to use the same pixel size for all images - I've suggested 133px by 73px but you can use whatever other size you want"
+      }
+
+	],
+     "blocks" : [
+      {
+        "type": "brand",
+        "name": "Brand",
+        "settings": [
+      {
+        "type": "header",
+        "content": "Brand"
+      },
+      {
+        "type": "image_picker",
+        "id": "slideshow_image",
+        "label": "Image",
+		"info": "133 x 73px png recommended"
+      },
+      {
+        "type": "url",
+        "id": "brand_link",
+        "label": "Link URL"
+      }
+	  ]
+ 	 }
+	],
+  "presets": [{
+    "name": "Brand Slideshow",
+    "category": "Image",
+    "settings": {
+    },
+    "blocks": [
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      },
+      {
+        "type": "brand"
+      }
+    ]
+  }]
+ }
+{% endschema %}
+
+{% stylesheet %}
+.slick-slide img {
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+
+.slick-slider{
+margin-top:30px;
+}
+
+.slick-track{
+display:flex;
+}
+
+.slick-dots {
+	display: flex;
+	justify-content: center;
+	
+	margin: 0;
+	padding: 1rem 0;
+	
+	list-style-type: none;
+	
+		li {
+			margin: 0 0.25rem;
+		}
+	
+		button {
+			display: block;
+			width: 1rem;
+			height: 1rem;
+			padding: 0;
+			
+			border: none;
+			border-radius: 100%;
+			background-color: blue;
+			
+			text-indent: -9999px;
+		}
+	
+		li.slick-active button {
+			background-color: red;
+		}
+	
+}
+
+{% endstylesheet %}
+

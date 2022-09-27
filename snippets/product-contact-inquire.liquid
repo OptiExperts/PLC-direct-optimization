@@ -1,0 +1,87 @@
+<head>
+<style>
+
+.container-inquire{
+    display: flex;
+    
+} 
+.form-inquire-1{
+    padding: 5px;
+    width: 50%;
+  	margin: auto;
+
+}
+.form-inquire-2{
+    padding: 5px;
+    flex-grow: 1;
+}
+</style>
+</head>
+
+<div class="container container--medium">
+  <div style="color: #bc1907;font-size:20px;">
+      <Strong>Price on request</Strong>
+      <br>Ask for quote</div>
+      
+      
+  <div class="layout">
+    
+    <div class="layout__section">
+       
+      {%- form 'contact', class: 'form' -%}
+        
+
+        {%- if form.posted_successfully? -%}
+          <p class="alert alert--success">{{ 'contact.form.successfully_sent' | t }}</p>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <div class="alert alert--error">
+            <ul class="alert__error-list">
+              {%- for field in form.errors -%}
+                {%- if field == 'form' -%}
+                  <li class="alert__error-item">{{ form.errors.messages[field] }}</li>
+                {%- else -%}
+                  <li class="alert__error-item">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      <div class="container-inquire">
+      
+        <div class="form-inquire-1">
+       
+          <div class="form__input-wrapper form__input-wrapper--labelled">
+            <textarea id="contact-form-name" type="text" class="form__field form__field--textarea {% if customer.name != blank %}is-filled{% endif %}" name="contact[name]" rows="1" aria-label="{{ 'contact.form.name' | t }}" required {% if customer %}value="{{ customer.name }}"{% endif %}></textarea>
+            <label for="contact-form-name" class="form__floating-label">{{ 'contact.form.name' | t }}</label>
+          </div>
+          
+          <div class="form__input-wrapper form__input-wrapper--labelled">
+            <textarea id="contact-form-email" type="email" class="form__field form__field--textarea {% if customer.email != blank %}is-filled{% endif %}" name="contact[email]" rows="1" aria-label="{{ 'contact.form.email' | t }}" required {% if customer %}value="{{ customer.email }}"{% endif %}></textarea>
+            <label for="contact-form-email" class="form__floating-label">{{ 'contact.form.email' | t }}</label>
+          </div>
+     	 <div class="form__input-wrapper form__input-wrapper--labelled">
+            <textarea id="contact-form-phone" type="phone" class="form__field form__field--textarea {% if customer.phone != blank %}is-filled{% endif %}" name="contact[phone]" rows="1" aria-label="{{ 'contact.form.phone' | t }}" required {% if customer %}value="{{ customer.phone }}"{% endif %}></textarea>
+            <label for="contact-form-phone" class="form__floating-label">{{ 'contact.form.phone' | t }}</label>
+          </div>
+      </div>
+              <div class="form-inquire-2">                                                                 
+      <div class="form__input-wrapper form__input-wrapper--labelled">
+          <textarea id="contact-form-message" name="contact[body]" rows="6" class="form__field form__field--textarea" aria-label="{{ 'contact.form.message' | t }}" required></textarea>
+          <label for="contact-form-message" class="form__floating-label">{{ 'contact.form.message' | t }}</label>
+       </div>
+      </div>
+      </div>
+      {% assign current_variant = product.selected_or_first_available_variant %}
+      <input type="hidden" name="contact[product_sku]" value="{{ current_variant.sku }}">
+
+       <center>
+        <button type="submit" class="button button--primary button--min-width">{{ 'contact.form.request' | t }}</button>
+      </center>
+         </div>
+      {%- endform -%}
+    </div>
+</div>
+
+

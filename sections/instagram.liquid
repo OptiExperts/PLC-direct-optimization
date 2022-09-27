@@ -1,0 +1,95 @@
+{%- capture section_settings -%}
+{
+  "accessToken": {{ section.settings.access_token | json }}
+}
+{%- endcapture -%}
+
+<section class="section section--text-centered" data-section-id="{{ section.id }}" data-section-type="instagram" data-section-settings='{{ section_settings }}'>
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="heading h3">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.content != blank -%}
+      <div class="rte">
+        {{ section.settings.content }}
+      </div>
+    {%- endif -%}
+
+    <div class="instagram-wrapper">
+      <div class="instafeed">
+        {%- if section.settings.access_token == blank -%}
+          {%- for i in (1..6) -%}
+            <a href="#" target="_blank" rel="nofollow noopener" class="instagram-item">
+              <div class="instagram-item__image" style="padding-bottom: 100%">
+                <div class="placeholder-background">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              </div>
+
+              <div class="instagram-item__overlay">
+                <span class="instagram-item__like-count">{% render 'icon', icon: 'heart' %} {{ 'home_page.onboarding.instagram_likes' | t }}</span>
+                <p class="instagram-item__caption">{{ 'home_page.onboarding.instagram_caption' | t }}</p>
+                <time class="instagram-item__date heading h6">{{ 'now' | date: format: 'month_day_year' }}</time>
+              </div>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%}We create dummy element to allocate space{%- endcomment -%}
+
+          <div class="instagram-item instagram-item--dummy">
+            <div class="instagram-item__image" style="padding-bottom: 100%"></div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.button_link != blank and section.settings.button_text != blank -%}
+      <div class="button-wrapper">
+        <a href="{{ section.settings.button_link }}" class="button button--primary" target="_blank" rel="nofollow noopener">{{ section.settings.button_text | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Instagram"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text",
+      "default": "<p>Follow us on Instagram and discover our new products!</p>"
+    },
+    {
+      "type": "text",
+      "id": "access_token",
+      "label": "Access token",
+      "info": "[Find your access token](https://www.maestrooo.com/instagram)."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Social media",
+      "name": "Instagram feed"
+    }
+  ]
+}
+{% endschema %}

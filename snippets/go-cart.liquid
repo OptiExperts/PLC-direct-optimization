@@ -1,0 +1,80 @@
+<script>
+      function start(){
+        window.loadScript = function(url, callback) {
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          // If the browser is Internet Explorer
+          if (script.readyState){
+            script.onreadystatechange = function() {
+              if (script.readyState == 'loaded' || script.readyState == 'complete') {
+                script.onreadystatechange = null;
+                callback();
+              }
+            };
+            // For any other browser
+          } else {
+            script.onload = function() {
+              callback();
+            };
+          }
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        };
+
+        window.goCartStart = function($) {
+          window.goCart = {
+            shopify_domain: '{{shop.permanent_domain}}',
+            cart_items: {{cart.item_count}},
+            app_url: 'https://gocartapp.herokuapp.com',
+          }
+          $.ajax({
+            type:'GET',
+            url: window.goCart.app_url+'/frontend/get_gocart_details',
+            data : {shopify_domain : window.goCart.shopify_domain},
+            crossDomain: true,
+            success:function(data){
+              var goCart_is_active = data.is_active;
+              console.log('response==',data);
+              if(goCart_is_active && window.goCart.cart_items > 0){
+                $( ".gocart-blink" ).css('animation', 'select-icon '+data.blink_speed+'s linear infinite');
+                $('body').find('[data-cart-count]').css('animation', 'select-icon '+data.blink_speed+'s linear infinite');
+                $( "a[href='/cart']" ).each(function( index ) {
+
+                  $(this).find('span').first().css('animation', 'select-icon '+data.blink_speed+'s linear infinite');
+                })
+              }
+            }
+          })
+        }
+      }
+
+      start();
+
+      if (typeof window.appton !== 'undefined'){
+        console.log("Jquery version==>",jQuery.fn.jquery);
+          loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js', function() {
+            jQuery340 = jQuery.noConflict(true);
+            goCartStart(jQuery340);
+          });
+      }else{
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js', function() {
+          jQuery340 = jQuery.noConflict(true);
+          goCartStart(jQuery340);
+        });
+      }
+      </script>
+      <style>
+        @-webkit-keyframes select-icon {
+          0% {
+            -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.89);
+          }
+          70% {
+              -webkit-box-shadow: 0 0 0 40px rgba(255, 255, 255, 0);
+          }
+          100% {
+              -webkit-box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+          }
+        }
+      </style>
+
+    
