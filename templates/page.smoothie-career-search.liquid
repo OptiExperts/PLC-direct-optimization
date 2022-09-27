@@ -144,12 +144,16 @@ text-align: center;
 
 <div id="smoothie-job-content" class="smoothie-search-page" style="">
 
+    
 
     <h1>Careers</h1>
+
+    
+
     
   
   <div class="job-page">
-    <ul>
+    <ul id="smoothie-search-list">
 
   {% if listings.size == 0 %}
     <p class="jobs-empty">There are no job opportunities at this time.</p>
@@ -190,6 +194,10 @@ text-align: center;
 
       {% if parts.size > 13 %}
         {% assign external_link = parts[14] %}
+      {% endif %}
+
+      {% if parts.size > 14 %}
+        {% assign listing_tag = parts[15] %}
       {% endif %}
 
       {% assign career_period_text = "" %}
@@ -263,7 +271,7 @@ text-align: center;
     <a href="{{ external_link }}" target="_blank">
     {% endif %}
     
-        <li>
+        <li class="smoothie-job-listing-card" location="{{ location }}" {% if listing_tag != blank %} tag="{{ listing_tag }}"{% endif %}>
           <h3>{{ title }}</h3>
 
           {% if location != "" and location != "null" %}
@@ -341,6 +349,6 @@ text-align: center;
     </ul>
   </div>
 
-  
-
 </div>
+
+
