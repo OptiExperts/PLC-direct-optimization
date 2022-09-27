@@ -144,6 +144,12 @@ p.ql-align-center{
 
 
 
+
+
+
+
+
+
 </style>
 
 {% assign cda = page.content | split: '<span id="smoothie-career-data" style="display: none !important;">' %}
@@ -218,6 +224,7 @@ p.ql-align-center{
 {% endif %}
 
 <div id="smoothie-job-content" class="smoothie-listing-page" style="">
+  
 
 
  <div class="job-page description">
@@ -310,36 +317,40 @@ p.ql-align-center{
   {{ page.content }}
    
   </div>
+
+ 
   
   <div id="af" class="job-page">
     <h2 style="margin-top: 5px; float: left;">APPLICATION FORM</h2>
     <span style="float:right;">* Required</span>
     <div style="clear: both;"></div>
+
     
-    <form method="post" class="job-form" action="https://careers.smooth.ie/application/submit" enctype="multipart/form-data" onsubmit="return (typeof submitted == 'undefined') ? (submitted = true) : !submitted">
-      <input type="hidden" name="job_id" value="{{ job_id }}">
-      <input type="hidden" name="page_url" value="{{ page.url }}">
-      <input type="hidden" name="shop_domain" value="{{ shop.domain }}">
-      <input type="hidden" name="user_name" value="{{ shop.permanent_domain }}">
-      <input type="hidden" name="job_title" value="{{ page.title }}">
+    <form id="smoothie-careers-form" method="post" class="job-form" action="https://careers.smooth.ie/application/submit" enctype="multipart/form-data" onsubmit="return (typeof submitted == 'undefined') ? (submitted = true) : !submitted">
+    
+      <input type="hidden" name="job_id" value="{{ job_id }}" />
+      <input type="hidden" name="page_url" value="{{ page.url }}" />
+      <input type="hidden" name="shop_domain" value="{{ shop.domain }}" />
+      <input type="hidden" name="user_name" value="{{ shop.permanent_domain }}" />
+      <input type="hidden" name="job_title" value="{{ page.title }}" />
 
       <div>
         <span class="smoothie-fname">
           <label for="fname">First name *</label>
-          <input type="text" id="fname" name="fname" required>
+          <input type="text" id="fname" name="fname" required />
         </span><span class="right smoothie-lname">
           <label for="lname">Last name *</label>
-          <input style="float: right;" type="text" id="lname" name="lname" required>
+          <input style="float: right;" type="text" id="lname" name="lname" required />
         </span>
       </div
       ><div>
         <span class="smoothie-email">
 
           <label for="email">Email address *</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email" required />
         </span><span class="right smoothie-resume">
           <label for="resume">Resume (.pdf and max of 4MB) *</label>
-          <input type="file" name="resume" id="resume" accept="application/pdf, .doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/plain" required>
+          <input type="file" name="resume" id="resume" accept="application/pdf, .doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, text/plain" required />
         </span>
       </div
       ><div>
@@ -358,7 +369,11 @@ p.ql-align-center{
         <textarea id="cover_letter" name="cover_letter"></textarea>
       </div>
 
+      
+
+      
       <h2 class="thank-you-text">Thank you. Your application has been received successfully.</h2>
+      
 
       <a href="/pages/career-opportunities">
       <button type="button" class="desktop-button back-button">View all listings</button>
@@ -367,6 +382,9 @@ p.ql-align-center{
       <button type="submit">SUBMIT APPLICATION</button>
       
     </form>
+
+
+    
 
     
   </div>
@@ -378,9 +396,9 @@ p.ql-align-center{
   </div>
 
 
-  
-
 </div>
+
+
 
 
 <script>
