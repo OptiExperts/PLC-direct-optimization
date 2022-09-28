@@ -715,10 +715,28 @@
                 <span class="tooltiptext">This product is new, guaranteed. For more information please reference
                   the  <a href="https://plc-direct.com/pages/product-information" style="color:red; "> Product Information page </a> </span>
               </span> -->
+           <script type="text/javascript">
+    
+        $(document).ready(function(){
+             $(".pos-ab").hover(
+                  function () {
+                    $(".hov-displays").toggleClass("my");
+                  }
+             );
+        });
+    </script>
 			 <div class="inventoryWrapper">
                     {% if selected_variant.inventory_quantity  > 0 and selected_variant.inventory_management == 'shopify' %}
-                    <p class="stock-dis" style="color: green;"><svg xmlns="http://www.w3.org/2000/svg" fill="green" width="14" height="14" viewBox="0 0 24 24"><path d="M0 12.116l2.053-1.897c2.401 1.162 3.924 2.045 6.622 3.969 5.073-5.757 8.426-8.678 14.657-12.555l.668 1.536c-5.139 4.484-8.902 9.479-14.321 19.198-3.343-3.936-5.574-6.446-9.679-10.251z"/></svg>&nbsp;Verified Stock</p>
-                    <p class="hov-display" 
+                    <p class="stock-dis" style="color: green;">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="green" width="14" height="14" viewBox="0 0 24 24">
+                      <path d="M0 12.116l2.053-1.897c2.401 1.162 3.924 2.045 6.622 3.969 5.073-5.757 8.426-8.678 14.657-12.555l.668 1.536c-5.139 4.484-8.902 9.479-14.321 19.198-3.343-3.936-5.574-6.446-9.679-10.251z"/>
+                      </svg>&nbsp;Verified Stock
+                       <svg class="pos-ab" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    </p>
+                    <p class="hov-display hov-displays" 
                        style="color: #fff;
     width: auto;
     display: inline-block;
@@ -728,7 +746,7 @@
     line-height: 0.9;
     font-size: 0.8em;
     position: absolute;
-    top: -150%;
+    top: -210%;
     right: 0%;">Stock levels are verified every 24 hours.</p>
                     {% endif %}
 
