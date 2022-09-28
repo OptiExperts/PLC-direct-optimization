@@ -286,6 +286,115 @@
     </style>  
    
     <hr class="card__separator">
+
+    <!--    cus delivery code    -->
+     
+       {% for variant in product.variants %}
+         {% if product.selected_or_first_available_variant.id == variant.id %}
+           {% assign mindays = variant.metafields.variants.min_delivery_window | times: 86400 %}
+           {% assign minda = variant.metafields.variants.min_delivery_window | plus: 2 %}
+           {% assign mindays1 = minda | times: 86400 %}
+           {% assign maxdays = variant.metafields.variants.max_delivery_window | times: 86400 %}
+           {% assign maxda = variant.metafields.variants.max_delivery_window | plus: 2 %}
+           {% assign maxdays1 = maxda | times: 86400 %}           
+           {% if mindays > 0 %}
+            
+            <div class="ship-calc">
+              <p class="hov-display hov-disp" style="color: #fff;width: auto;display: inline-block;background-color: #bc1907;padding: 1%;z-index: 99;line-height: 0.9;
+              font-size: 0.8em;position: absolute;top: -150%;right: 0%;">
+                Estimated delivery dates are estimates only. Int'l customers allow a few more days. For more precise delivery estimates, please contact us at support@plc-direct.com. 
+                Contact us in advance for expedited shipping options.
+              </p>
+              <p class="instock-shipping">
+                <img src="https://cdn.shopify.com/s/files/1/0349/2973/7859/files/icons8-clock-24.svg?v=1663585903">
+             <span class="estimated_time">Est. delivery between 
+             <span class="fromDate" id="fromDate" value="{{ variant.metafields.variants.min_delivery_window }}"></span> and 
+             <span value="{{ variant.metafields.variants.max_delivery_window }}" class="toDate" id="toDate"></span>
+            </span>
+             
+             <script type="text/javascript">
+    
+        $(document).ready(function(){
+             $(".pos-abs").hover(
+                  function () {
+                   $(".hov-disp").toggleClass("my");
+                  }
+             );
+        });
+    </script>
+              {{ '//cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js' | script_tag }}
+            <script>
+              var fr = document.getElementById('fromDate').getAttribute('value');
+             console.log(fr);
+             var to = document.getElementById('toDate').getAttribute('value');
+             console.log(to); 
+             console.log("diff");
+             var diff = parseInt(to) - parseInt(fr);
+             console.log(diff);
+             var date = Date.today().addDays(0);
+             console.log(date);
+             var fromDate = date.addDays(parseInt(fr));
+             console.log(fromDate);
+             
+            
+            if (fromDate.is().saturday()) { 
+              fromDate = fromDate.next().monday();
+            }
+            else if (fromDate.is().sunday()) { 
+              fromDate = fromDate.next().tuesday();
+            }
+             else if (fromDate.is().monday() || fromDate.is().tuesday()) { 
+              fromDate = fromDate.next().wednesday();
+              
+            }
+              document.getElementById('fromDate').innerHTML = fromDate.toString('dddd, MMMM dS');
+            //to calc
+            var toDate = fromDate.addDays(parseInt(diff));
+             console.log(toDate);
+            if (toDate.is().saturday()) { 
+              toDate = toDate.next().monday();
+            }
+            else if (toDate.is().sunday()) { 
+              toDate = toDate.next().tuesday();
+            }
+             else if (toDate.is().monday() || toDate.is().tuesday()) { 
+              toDate = toDate.next().wednesday();
+              
+            }
+             
+           // var toDate = fromDate.addDays(parseInt(diff));
+            // if (toDate.is().saturday()) { 
+            //   toDate = toDate.next().monday(); 
+            // }
+            //  if (toDate.is().sunday()) { 
+            //   toDate = toDate.next().tuesday(); 
+            // }
+             
+
+            
+            document.getElementById('toDate').innerHTML = toDate.toString('dddd, MMMM dS');
+            </script> 
+
+
+               <svg class="pos-abs" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+             
+               </p>
+             </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+        jQuery(document).ready(function($){
+        $(".no-js-hidden").on("click", function(){
+        var refreshint = setInterval(function(){
+        location.reload();
+        }, 1000);    });   });
+        </script>
+        <!-- end estimate delivery code  -->
     
     <div class="desc_panel">
          {%- if product.description != blank -%}
