@@ -298,7 +298,7 @@
            {% assign maxda = variant.metafields.variants.max_delivery_window | plus: 2 %}
            {% assign maxdays1 = maxda | times: 86400 %}           
            {% if mindays > 0 or variant.inventory_quantity > 0 %}
-            
+            {{ variant.inventory_quantity }}
             <div class="ship-calc">
               <p class="hov-display hov-disp" style="color: #fff;width: auto;display: inline-block;background-color: #bc1907;padding: 1%;z-index: 99;line-height: 0.9;
               font-size: 0.8em;position: absolute;top: -150%;right: 0%;">
