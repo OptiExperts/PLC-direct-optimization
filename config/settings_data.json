@@ -34,7 +34,7 @@
     "currency_conversion_supported_currencies": "USD CAD EUR GBP INR AUD SEK",
     "currency_conversion_money_format": "money_with_currency_format",
     "search_mode": "product",
-    "show_vendor": true,
+    "show_vendor": false,
     "show_secondary_image": false,
     "show_discount": true,
     "discount_mode": "percentage",
