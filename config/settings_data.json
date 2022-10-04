@@ -44,7 +44,7 @@
     "show_inventory_quantity": false,
     "low_inventory_threshold": 1,
     "show_reviews_badge": false,
-    "cart_type": "page",
+    "cart_type": "drawer",
     "cart_empty_button_link": "shopify:\/\/collections\/all",
     "cart_show_free_shipping_threshold": false,
     "cart_free_shipping_threshold": "0",
