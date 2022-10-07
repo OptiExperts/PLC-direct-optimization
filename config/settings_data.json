@@ -963,10 +963,18 @@
           "autoplay": true,
           "cycle_speed": 5
         }
+      },
+      "331a89a0-789d-42db-9a8b-a6ac9df84b9b": {
+        "type": "custom-html",
+        "settings": {
+          "title": "",
+          "html": "<h1>Programmable Logic Controllers and Industrial Automation Products<\/h1>"
+        }
       }
     },
     "content_for_index": [
       "slideshow",
+      "331a89a0-789d-42db-9a8b-a6ac9df84b9b",
       "1660105843499aaab1",
       "162177316843c3b64b",
       "collection-list",
