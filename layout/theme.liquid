@@ -73,7 +73,45 @@
     {%- if page_description -%}
     <meta name="description" content="{{ page_description | escape }}">
     {%- endif -%}
-    <link rel="canonical" href="{{ canonical_url }}">
+
+    {% if template contains 'collection' and current_tags %}
+    <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
+  {% elsif template == "product" %}
+      <link rel="canonical" href="{{ shop.url }}{{ product.url }}" />
+  {% else %}
+      <script>
+          document.addEventListener("DOMContentLoaded", function(){
+             try {
+                 var URL = window.location.href;
+                 var htmlTag = "";
+                 if(URL.includes("?page=") || URL.includes("&page=") || URL.includes("?sort")){
+                     var newURLArray = URL.split("?");
+                     var newURL = newURLArray[0];
+                     htmlTag = newURL;
+                  }
+              else{
+                  htmlTag = URL;
+              }
+              var link = document.createElement("link");
+              link.rel = "canonical";
+              link.href = htmlTag;
+
+              var links = document.getElementsByTagName("link");
+              for(var i = 0; i < links.length; i++){
+                  if(links[i].hasAttribute("rel")) {
+                      if(links[i].getAttribute("rel") === "canonical"){
+                          links[i].remove();
+                      }      
+                  }
+              }
+              document.getElementsByTagName("head")[0].appendChild(link);
+              } catch(error){
+
+              }
+          }, false);
+      </script>
+  {% endif %}
+  
     {%- if settings.favicon -%}
     <link rel="shortcut icon" href="{{ settings.favicon | img_url: '48x48' }}" type="image/png">
     {%- endif -%}
