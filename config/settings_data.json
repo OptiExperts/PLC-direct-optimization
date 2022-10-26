@@ -986,7 +986,7 @@
     "blocks": {
       "3475573022091160205": {
         "type": "shopify:\/\/apps\/blockify-ip-block\/blocks\/app-embed\/2e3e0ba5-0e70-447a-9ec5-3bf76b5ef12e",
-        "disabled": false,
+        "disabled": true,
         "settings": {
         }
       }
