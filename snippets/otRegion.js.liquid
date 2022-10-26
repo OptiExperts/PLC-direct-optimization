@@ -1,5 +1,5 @@
 let otRegionCheckAdminUpdate = true;
-let checkAllSite;
+let checkAllSite = true;
 let linkRedirectOtRegion = document.createElement('meta');
 linkRedirectOtRegion.setAttribute('http-equiv', 'refresh');
 
@@ -140,7 +140,8 @@ const otRegionMain = () => {
     regionInit();
   } else {
     let otRegionIpcandidate = localStorage.getItem('otRegionIpcandidate');
-    if (otRegionIpcandidate !== null && otRegionDomBlockIP !== null) {
+    let otRegionAutoBlock = localStorage.getItem("otRegionAutoBlock");
+    if (otRegionIpcandidate !== null && otRegionDomBlockIP !== null && otRegionAutoBlock == 1) {
       handleDomCache(otRegionDomBlockIP);
       if (__st.p === 'collection') {
         if (otRegionDomBlockIP === '') {
