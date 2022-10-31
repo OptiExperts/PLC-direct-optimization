@@ -970,6 +970,39 @@
           "title": "",
           "html": "<h1>Programmable Logic Controllers and Industrial Automation Products<\/h1>\n\n<p>The right industrial automation product is essential to your industrial manufacturing systems. Regardless of the product you produce or the range of machines you use, having the right programmable logic controllers can do wonders for your output and operation efficiency. At PLC Direct, we believe in getting you the programmable logic controllers you need exactly when you need them—not after. As a US-based PLC distributor, we only offer you items that we know we have in stock. This way, you’ll know right away whether we can fill your order in the timeframe you require. When shopping with us, you’ll receive shorter lead times and quality PLCs for sale from the industry’s top brands. <\/p>"
         }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "settings": {
+          "articles_per_page": 12,
+          "highlight_first_article": true,
+          "show_tags": true,
+          "show_category": true,
+          "show_author": true,
+          "show_date": true,
+          "show_excerpt": false
+        }
+      },
+      "blog-sidebar": {
+        "type": "blog-sidebar",
+        "blocks": {
+          "blog-sidebar-0": {
+            "type": "newsletter",
+            "settings": {
+              "title": "Join Us",
+              "content": "<p>Subscribe to Our Email Newsletter<\/p>",
+              "subtext": "100% free, Unsubscribe any time!",
+              "background": "#1e2d7d",
+              "text": "#ffffff"
+            }
+          }
+        },
+        "block_order": [
+          "blog-sidebar-0"
+        ],
+        "settings": {
+          "show_on_mobile": true
+        }
       }
     },
     "content_for_index": [
@@ -982,15 +1015,7 @@
       "1591031604785",
       "1591031681628",
       "1591031652713"
-    ],
-    "blocks": {
-      "3475573022091160205": {
-        "type": "shopify:\/\/apps\/blockify-ip-block\/blocks\/app-embed\/2e3e0ba5-0e70-447a-9ec5-3bf76b5ef12e",
-        "disabled": true,
-        "settings": {
-        }
-      }
-    }
+    ]
   },
   "presets": {
     "Metal": {
