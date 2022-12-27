@@ -270,7 +270,8 @@
     </script>
   
                         {% include 'otRegion' %}            
-                        </head> 
+                          {% render 'rapid-search-settings' %}
+</head> 
   <body class="warehouse--v1 {% if template.directory %}template-{{ template.directory | handle | replace: '_', '-' }}{% endif %} template-{{ template.name | handle | replace: '_', '-' }}">
     <span class="loading-bar"></span>
     {% section 'announcement-bar' %}
